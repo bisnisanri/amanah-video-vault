@@ -319,6 +319,13 @@ app.post('/api/upload-video', upload.single('videoFile'), async (req, res) => {
 
 // 6. MENJALANKAN SERVER
 const PORT = process.env.PORT || 3000;
+// Tambahkan baris ini agar server otomatis membaca file di folder public
+app.use(express.static('public'));
+
+// Atau jika root route belum diset:
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/public/index.html');
+});
 app.listen(PORT, () => {
   console.log(`🚀 Server berjalan di http://localhost:${PORT}`);
 });
